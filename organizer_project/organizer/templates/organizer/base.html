@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <!-- Compiled CSS -->
+    <link rel="stylesheet" href="{% static "organizer/css/materialize.min.css" %}">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" type="text/css" href="{% static "organizer/css/custom.css" %}">
+
+    <!--Import Google Icon Font-->
+    <link rel="stylesheet" href="{% static "organizer/fonts/material_icons.css" %}">
+  
+  </head>
+  <body>
+    <!-- Document wrapper -->
+    <div id="wrapper">
+      <div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Logo</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="sass.html">Sass</a></li>
+              <li><a href="badges.html">Components</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+
+      <!-- Main contet from other templates -->
+      <main>
+        {% block content %} 
+        {% endblock %}
+      <main>
+      <!-- End content -->
+
+    </div>
+    <!-- End wrapper -->
+
+    <!-- jQuery - required before materialize.js -->
+    <script src="{% static "organizer/js/jquery-3.1.1.js" %}">></script>
+
+    <!-- Compiled JavaScript -->
+    <script src="{% static "organizer/js/materialize.min.js" %}">></script>
+
+    <!-- Custom script -->
+    <script src="{% static "organizer/js/script.js" %}">></script>
+
+  </body>
+</html>
