@@ -1,16 +1,23 @@
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 main {
-	padding-bottom: 100vh;
-  	flex: 1 0 auto;
-  	position: relative;
-    background: url(../img/bg.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
+  flex: 1 0 auto;
+  background-color: #4DB6AC;
 }
-      
+
+#index-panel {
+  margin-top: 20%;
+}
+
+#left-btn {
+  float: right;
+  margin-right: 5%;
+}
+
+#right-btn {
+  margin-left: 5%;
+}
