@@ -6,7 +6,12 @@ body {
 
 main {
   flex: 1 0 auto;
-  background-color: #4DB6AC;
+  background-image: url("../img/01.jpg");
+  webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: 60%;
 }
 
 #index-panel {

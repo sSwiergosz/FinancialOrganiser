@@ -20,11 +20,20 @@
 
     <header>
       <nav>
-        <div class="nav-wrapper" style="background-color: #009688";>
+        <div class="nav-wrapper" style="background-color: #0097A7";>
           <a href="#!" class="brand-logo">Logo</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="sass.html">Sass</a></li>
             <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
           </ul>
         </div>
       </nav>
@@ -38,7 +47,7 @@
     <!-- End content -->
 
     <!-- Footer -->
-    <footer class="page-footer" style="background-color: #80CBC4;">
+    <footer class="page-footer" style="background-color: #0097A7;">
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
@@ -57,7 +66,7 @@
     <script src="{% static "organizer/js/materialize.min.js" %}">></script>
 
     <!-- Custom script -->
-    <script src="{% static "organizer/js/script.js" %}">></script>
+    <script src="{% static "organizer/js/custom.js" %}">></script>
 
   </body>
 </html>
