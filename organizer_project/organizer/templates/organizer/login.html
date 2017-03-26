@@ -1,0 +1,27 @@
+{% extends 'organizer/base.html' %}
+
+{% block _title %}Login{% endblock %}
+
+{% block content %}
+<main class="login-main">
+
+	<div class="row">
+        <div class="col s8 offset-s2">
+          <div class="card white z-depth-4" id="login-card">
+            <div class="card-content black-text">
+              <form method="post">
+			    {% csrf_token %}
+			    {{ form.as_p }}
+			    	<div class="center-align">
+					    <button type="submit" class="waves-effect waves-light btn amber z-depth-3">Login</button>
+					    <button class="waves-effect waves-light btn amber z-depth-3" id="bottom-btn">Sign up</button>
+					</div>
+			  </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  
+</main>
+{% endblock %}
