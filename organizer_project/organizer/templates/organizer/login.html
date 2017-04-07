@@ -3,11 +3,11 @@
 {% block _title %}Login{% endblock %}
 
 {% block content %}
-<main class="login-main">
+<main class="bg-color-main">
 
 	<div class="row">
-        <div class="col s8 offset-s2">
-          <div class="card white z-depth-4" id="login-card">
+        <div class="col s6 offset-s3">
+          <div class="card white z-depth-4" id="auth-card">
             <div class="card-content black-text">
               <form method="post">
 			    {% csrf_token %}

@@ -1,1 +1,43 @@
-<h1>Home page</h1>
+{% extends 'organizer/base.html' %}
+{% load static %}
+
+{% block _title %}Home{% endblock %}
+
+{% block content %}
+<main class="bg-color-main">
+	<div class="container">
+
+		<div class="grid">
+
+				<div class="card white z-depth-4 draggable" id="auth-card">
+	            <div class="card-content black-text">
+					{% if user.is_authenticated %}
+						<!--<script>document.getElementById('login-btn').style.display = 'none';</script>-->
+						<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+					{% endif %}
+				</div>
+				</div>
+
+				
+
+			<div class="card white z-depth-4 draggable" id="auth-card">
+            <div class="card-content black-text">
+              
+            
+				<p><br><br>Your transactions: </p>
+				{% if not transaction_list %}
+					<p>You don't have any transactions</p>
+				{% else %}
+
+				{% for i in transaction_list %}
+					{{ i.product }}
+				{% endfor %}
+				{% endif %}
+				</div>
+          </div>
+		
+		</div>
+
+	</div>
+</main>
+{% endblock %}

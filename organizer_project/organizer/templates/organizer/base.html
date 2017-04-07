@@ -8,7 +8,7 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
-    <!-- Compiled CSS -->
+    <!-- Compiled Materialize CSS -->
     <link rel="stylesheet" href="{% static "organizer/css/materialize.min.css" %}">
     <!-- Custom styles -->
     <link rel="stylesheet" type="text/css" href="{% static "organizer/css/custom.css" %}">
@@ -24,7 +24,7 @@
       <!-- Navbar -->
       <nav>
         <div class="nav-wrapper" style="background-color: #0097A7";>
-          <a href="#" class="brand-logo" style="margin-left: 1%;">Financial organiser</a>
+          <a href="{% url 'organizer:index' %}" class="brand-logo" style="margin-left: 1%;">Financial organiser</a>
 
           <!-- Mobile navbar initialization -->
           <a href="#" data-activates="mobile-demo" class="button-collapse">
@@ -34,13 +34,23 @@
           <!-- Buttons in the right part of navbar -->
           <ul class="right hide-on-med-and-down">
             <li>
-              <a href="#">
+              <a href="{% url 'organizer:add_transaction' %}">
+                <i class="material-icons left">note_add</i>Add Transaction
+              </a>
+            </li>
+            <li id="login-btn">
+              <a href="{% url 'organizer:login' %}">
                 <i class="material-icons left">lock_open</i>Login
               </a>
             </li>
             <li>
-              <a href="#">
-                <i class="material-icons left">perm_identity</i>Register
+              <a href="{% url 'organizer:signup' %}">
+                <i class="material-icons left">perm_identity</i>Sign Up
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'organizer:logout' %}">
+                Logout
               </a>
             </li>
           </ul>
@@ -67,8 +77,8 @@
 
     <!-- Main contet from other templates -->
 
-      {% block content %} 
-      {% endblock %}
+    {% block content %} 
+    {% endblock %}
 
     <!-- End content -->
 
@@ -85,15 +95,20 @@
       
     </footer>
     <!-- End footer -->
-
+    
+    
     <!-- jQuery - required before materialize.js -->
-    <script src="{% static "organizer/js/jquery-3.1.1.js" %}">></script>
+    <script src="{% static "organizer/js/jquery-3.1.1.js" %}"></script>
 
     <!-- Compiled JavaScript -->
-    <script src="{% static "organizer/js/materialize.min.js" %}">></script>
+    <script src="{% static "organizer/js/materialize.min.js" %}"></script>
 
     <!-- Custom script -->
-    <script src="{% static "organizer/js/custom.js" %}">></script>
+ 
+    
+    <script src="{% static "organizer/plugins/packery/packery.pkgd.min.js" %}"></script>
+    <script src="{% static "organizer/plugins/packery/draggabilly.pkgd.js" %}"></script>
+    <script src="{% static "organizer/js/custom.js" %}"></script> 
 
   </body>
 </html>

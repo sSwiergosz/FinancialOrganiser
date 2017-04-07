@@ -1,0 +1,25 @@
+{% extends 'organizer/base.html' %}
+
+{% block _title %}Login{% endblock %}
+
+{% block content %}
+<main class="bg-color-main">
+    <script>
+        var timer = setTimeout(function() {
+            window.location.href='{% url 'organizer:home' %}'
+        }, 1500);
+    </script>
+
+    <div class="row">
+        <div class="col s6 offset-s3">
+          <div class="card white z-depth-4" id="auth-card">
+            <div class="card-content black-text">
+              <p>Transakcja została pomyślnie zapisana!</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</main>
+
+{%endblock%}	

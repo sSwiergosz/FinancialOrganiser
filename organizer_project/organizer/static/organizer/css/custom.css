@@ -1,9 +1,13 @@
+/* Order in this file - media queries, HTML tags, classes and ids*/
+
+/* Media queries */
 @media only screen and (max-width: 425px) {
   #bottom-btn {
     margin-top: 5%;
   }
 }
 
+/* HTML tags */
 body {
   display: flex;
   min-height: 100vh;
@@ -12,6 +16,15 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+
+/* Classes */
+.bg-color-main {
+  background-color: #84d1c9;
+}
+
+.grid-item {
+  width: 25%;
 }
 
 .test {
@@ -24,14 +37,11 @@ main {
   min-height: 100%;
 }
 
-.login-main {
-  background-color: #84d1c9;
-}
-
+/* Ids */
 #footer-text {
 	text-align: center;
 }
 
-#login-card {
-  margin-top: 12%;
+#auth-card {
+  margin-top: 5%;
 }
