@@ -9,12 +9,12 @@
         <div class="col s6 offset-s3">
           <div class="card white z-depth-4" id="auth-card">
             <div class="card-content black-text">
-              <form method="post">
+              <form method="post" id="login-form">
 			    {% csrf_token %}
 			    {{ form.as_p }}
 			    	<div class="center-align">
-					    <button type="submit" class="waves-effect waves-light btn amber z-depth-3">Login</button>
-					    <button class="waves-effect waves-light btn amber z-depth-3" id="bottom-btn">Sign up</button>
+					    <button type="submit" class="waves-effect waves-light btn amber z-depth-3" id="login-confirm-btn">Login</button>
+					    <button class="waves-effect waves-light btn amber z-depth-3">Sign up</button>
 					</div>
 			  </form>
             </div>

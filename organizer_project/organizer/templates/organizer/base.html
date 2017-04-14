@@ -33,7 +33,7 @@
 
           <!-- Buttons in the right part of navbar -->
           <ul class="right hide-on-med-and-down">
-            <li>
+            <li id="add-tran-btn" class="hide">
               <a href="{% url 'organizer:add_transaction' %}">
                 <i class="material-icons left">note_add</i>Add Transaction
               </a>
@@ -43,14 +43,14 @@
                 <i class="material-icons left">lock_open</i>Login
               </a>
             </li>
-            <li>
+            <li id="signup-btn">
               <a href="{% url 'organizer:signup' %}">
                 <i class="material-icons left">perm_identity</i>Sign Up
               </a>
             </li>
-            <li>
+            <li id="logout-btn" class="hide">
               <a href="{% url 'organizer:logout' %}">
-                Logout
+                <i class="material-icons left">lock</i>Logout
               </a>
             </li>
           </ul>
@@ -104,11 +104,11 @@
     <script src="{% static "organizer/js/materialize.min.js" %}"></script>
 
     <!-- Custom script -->
- 
-    
     <script src="{% static "organizer/plugins/packery/packery.pkgd.min.js" %}"></script>
     <script src="{% static "organizer/plugins/packery/draggabilly.pkgd.js" %}"></script>
-    <script src="{% static "organizer/js/custom.js" %}"></script> 
+    <script src="{% static "organizer/js/custom.js" %}"></script>
 
+    {% block extra_js %}
+    {% endblock %} 
   </body>
 </html>

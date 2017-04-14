@@ -13,7 +13,7 @@ def index(request):
 @login_required(login_url='/login/')
 def home(request):
 
-    transaction_list = Transaction.objects.all()
+    transaction_list = Transaction.objects.all().order_by('-id')[:3]
 
     context = {
         'transaction_list': transaction_list,
