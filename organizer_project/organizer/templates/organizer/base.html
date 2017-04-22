@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="{% static "organizer/fonts/material_icons.css" %}">
     <!-- Materialize icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    {% block extra_css %}
+    {% endblock %}
   
   </head>
   <body>
@@ -33,9 +36,14 @@
 
           <!-- Buttons in the right part of navbar -->
           <ul class="right hide-on-med-and-down">
+            <li id="all-tran-btn" class="hide">
+              <a href="{% url 'organizer:all_transactions' %}">
+                <i class="material-icons left">shopping_basket</i>All transactions
+              </a>
+            </li>
             <li id="add-tran-btn" class="hide">
               <a href="{% url 'organizer:add_transaction' %}">
-                <i class="material-icons left">note_add</i>Add Transaction
+                <i class="material-icons left">note_add</i>Add transaction
               </a>
             </li>
             <li id="login-btn">

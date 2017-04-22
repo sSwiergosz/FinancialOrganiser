@@ -1,0 +1,49 @@
+{% extends 'organizer/base.html' %}
+{% load static %}
+
+{% block _title %}All transactions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static "organizer/plugins/datatables/semantic.min.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "organizer/plugins/datatables/dataTables.semanticui.min.css" %}">
+
+{% endblock %}
+
+{% block content %}
+<main class="bg-color-main">
+    
+    <div class="card white z-depth-4" id="trans-card">
+        <div class="card-content black-text"> 
+            <table id="example" class="ui celled table" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Cost</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in transaction_list %}
+                        <tr>
+                            <td>{{ i.product }}</td>
+                            <td>{{ i.price }}</td>
+                            <td>{{ i.purchase_date }}</td>
+                            <td>{{ i.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static "organizer/js/navbar_buttons.js" %}"></script>
+<script src="{% static "organizer/plugins/datatables/jquery.dataTables.min.js" %}"></script>
+<script src="{% static "organizer/plugins/datatables/dataTables.semanticui.min.js" %}"></script>
+<script src="{% static "organizer/plugins/datatables/semantic.min.js" %}"></script>
+{% endblock %}

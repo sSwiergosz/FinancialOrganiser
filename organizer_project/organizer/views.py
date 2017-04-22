@@ -13,7 +13,7 @@ def index(request):
 @login_required(login_url='/login/')
 def home(request):
 
-    transaction_list = Transaction.objects.all().order_by('-id')[:3]
+    transaction_list = Transaction.objects.all().order_by('-id')[:5]
 
     context = {
         'transaction_list': transaction_list,
@@ -53,3 +53,14 @@ def add_transaction(request):
             return render(request, 'organizer/test.html')
 
     return render(request, 'organizer/add-transaction.html', {'form': form})
+
+
+def all_transactions(request):
+
+    transaction_list = Transaction.objects.all()
+
+    context = {
+        'transaction_list': transaction_list,
+    }
+
+    return render(request, 'organizer/all_transactions.html', context)
