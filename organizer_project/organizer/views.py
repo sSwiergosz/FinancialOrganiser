@@ -46,13 +46,14 @@ def add_transaction(request):
             t = form.save(commit=False)
             t.user = request.user
             t.product = form.cleaned_data.get('product')
+            t.category = form.cleaned_data.get('category')
             t.price = form.cleaned_data.get('price')
             t.purchase_date = form.cleaned_data.get('purchase_date')
             t.description = form.cleaned_data.get('description')
             t.save()
             return render(request, 'organizer/test.html')
 
-    return render(request, 'organizer/add-transaction.html', {'form': form})
+    return render(request, 'organizer/add-transaction.html', {'form': form, })
 
 
 def all_transactions(request):
@@ -64,3 +65,17 @@ def all_transactions(request):
     }
 
     return render(request, 'organizer/all_transactions.html', context)
+
+
+def statistics(request):
+
+    amount = 0
+
+    for i in Transaction.objects.all():
+        amount += i.price
+
+    context = {
+        'amount': amount,
+    }
+
+    return render(request, 'organizer/statistics.html', context)

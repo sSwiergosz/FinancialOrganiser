@@ -1,0 +1,24 @@
+{% extends 'organizer/base.html' %}
+{% load static %}
+
+{% block _title %}Statistics{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<main class="bg-color-main">
+    
+    <div class="card white z-depth-4" id="trans-card">
+        <div class="card-content black-text"> 
+
+            <p>You've spent {{ amount }}. That's crazy!</p>
+           
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

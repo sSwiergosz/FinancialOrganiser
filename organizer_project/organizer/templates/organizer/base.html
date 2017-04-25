@@ -46,6 +46,11 @@
                 <i class="material-icons left">note_add</i>Add transaction
               </a>
             </li>
+            <li id="stat-btn" class="hide">
+              <a href="{% url 'organizer:statistics' %}">
+                <i class="material-icons left">trending_down</i>Statistics
+              </a>
+            </li>
             <li id="login-btn">
               <a href="{% url 'organizer:login' %}">
                 <i class="material-icons left">lock_open</i>Login
@@ -112,8 +117,6 @@
     <script src="{% static "organizer/js/materialize.min.js" %}"></script>
 
     <!-- Custom script -->
-    <script src="{% static "organizer/plugins/packery/packery.pkgd.min.js" %}"></script>
-    <script src="{% static "organizer/plugins/packery/draggabilly.pkgd.js" %}"></script>
     <script src="{% static "organizer/js/custom.js" %}"></script>
 
     {% block extra_js %}

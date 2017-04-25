@@ -11,17 +11,18 @@
             <div class="card-content black-text">
               <form method="post">
 			    {% csrf_token %}
-    			{% for field in form %}
-					<p>
-				        {{ field.label_tag }}<br>
-				        {{ field }}
+				
+					{% for field in form %}
 
-				        {% for error in field.errors %}
-				          <p style="color: red">{{ error }}</p>
-				        {% endfor %}
-				    </p>
+						<p>{{ field.label_tag }}</p>
+						<p>{{ field }}</p>
 
-				{% endfor %}
+					{% endfor %}
+
+				    {% for error in field.errors %}
+					    <p style="color: red">{{ error }}</p>
+				    {% endfor %}
+									
 				<div class="center-align">
 					<button type="submit" class="waves-effect waves-light btn amber z-depth-3">Add transaction</button>
 				</div>

@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^home/$', views.home, name='home'),
     url(r'^add/transaction/$', views.add_transaction, name='add_transaction'),
     url(r'^transactions/all/$', views.all_transactions, name='all_transactions'),
+    url(r'^statistics/all/$', views.statistics, name='statistics')
 ]
