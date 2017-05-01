@@ -1,0 +1,145 @@
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+import datetime
+from django.utils import timezone
+
+from organizer.models import Transaction
+from organizer.forms import SignUpForm, AddTransactionForm
+
+def index(request):
+	
+	return render(request, 'organizer/index.html')
+
+
+@login_required(login_url='/login/')
+def home(request):
+
+    transaction_list = Transaction.objects.all().order_by('-id')[:5]
+
+    context = {
+        'transaction_list': transaction_list,
+    }
+
+    return render(request, 'organizer/home.html', context)
+
+    
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return render(request, 'organizer/home.html')
+    else:
+        form = SignUpForm()
+    return render(request, 'organizer/signup.html', {'form': form})
+
+
+def add_transaction(request):
+    if not request.user.is_authenticated():
+        return render(request, 'organizer/login.html')
+    else:
+        form = AddTransactionForm(request.POST or None)
+        if form.is_valid():
+            t = form.save(commit=False)
+            t.user = request.user
+            t.product = form.cleaned_data.get('product')
+            t.category = form.cleaned_data.get('category')
+            t.price = form.cleaned_data.get('price')
+            t.purchase_date = form.cleaned_data.get('purchase_date')
+            t.description = form.cleaned_data.get('description')
+            t.save()
+            return render(request, 'organizer/test.html')
+
+    return render(request, 'organizer/add-transaction.html', {'form': form, })
+
+
+def all_transactions(request):
+
+    transaction_list = Transaction.objects.all()
+
+    context = {
+        'transaction_list': transaction_list,
+    }
+
+    return render(request, 'organizer/all_transactions.html', context)
+
+
+def statistics(request):
+
+    today = datetime.date.today()
+    today_day = datetime.date.today().strftime('%A')
+
+    amount_all = 0
+    amount_monthly = 0
+    amount_weekly = 0
+    amount_daily = 0
+
+    cat_app = 0
+    cat_ent = 0
+    cat_food = 0
+    cat_skin = 0
+    cat_comp = 0
+    cat_book = 0
+    cat_oth = 0
+
+    for i in Transaction.objects.all():
+        amount_all += i.price
+
+        ### Ostatni miesiac, tydzien etc.
+        last_30_days = (timezone.now() - datetime.timedelta(days=30))
+
+        ### Sprawdzanie, czy jest pozniej czy wczesniej
+        if timezone.now() < last_30_days:
+            pass
+
+        ###############################
+        if i.purchase_date.strftime('%B') == today.strftime('%B'):
+            amount_monthly += i.price
+
+        if today_day != 'Monday':
+            amount_weekly += i.price
+        else:
+            amount_weekly = 0
+            amount_weekly += i.price
+
+        if i.purchase_date == today:
+            amount_daily += i.price
+        ################################
+
+        if i.category == 'Apparel/Accesory':
+            cat_app += i.price
+        elif i.category == 'Entertainment':
+            cat_ent += i.price
+        elif i.category == 'Food/Beverage':
+            cat_food += i.price
+        elif i.category == 'Skin care/Cosmetics':
+            cat_skin += i.price
+        elif i.category == 'Computer/Mobile':
+            cat_comp += i.price
+        elif i.category == 'Books/Newspapers':
+            cat_book += i.price
+        elif i.category == 'Other':
+            cat_oth += i.price
+
+
+    context = {
+        'amount_all': amount_all,
+        'amount_monthly': amount_monthly,
+        'amount_weekly': amount_weekly,
+        'amount_daily': amount_daily,
+        'app': cat_app,
+        'ent': cat_ent,
+        'food': cat_food,
+        'skin': cat_skin,
+        'comp': cat_comp,
+        'book': cat_book,
+        'oth': cat_oth,
+    }
+
+    return render(request, 'organizer/statistics.html', context)
