@@ -9,11 +9,40 @@
 {% block content %}
 <main class="bg-color-main">
     
-    <div class="card white z-depth-4" id="trans-card">
-        <div class="card-content black-text"> 
-
-            <p>You've spent {{ amount }}. That's crazy!</p>
-           
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card white z-depth-4 trans-card">
+                <div class="card-content black-text"> 
+                    <h5 class="center-align">All time: {{amount_all}}</h5>
+                    <canvas id="myChartAll" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">    
+            <div class="card white z-depth-4 trans-card">
+                <div class="card-content black-text"> 
+                    <h5 class="center-align">Last month: {{amount_monthly}}</h5>
+                    <canvas id="myChartMonth" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card white z-depth-4 trans-card">
+                <div class="card-content black-text"> 
+                    <h5 class="center-align">Last week: {{amount_weekly}}</h5>
+                    <canvas id="myChartWeek" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">    
+            <div class="card white z-depth-4 trans-card">
+                <div class="card-content black-text"> 
+                    <h5 class="center-align">Last 24h: {{amount_daily}}</h5>
+                    <canvas id="myChartDay" width="400" height="400"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -21,4 +50,99 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+var ctx = document.getElementById("myChartAll");
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+        datasets: [{
+            label: 'Amount',
+            data: [{{cat_app_all}}, {{cat_ent_all}}, {{cat_food_all}}, {{cat_skin_all}},
+                    {{cat_comp_all}}, {{cat_book_all}}, {{cat_oth_all}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+
+            borderWidth: 1
+        }]
+    },
+});
+
+var ctx2 = document.getElementById("myChartMonth");
+var myChart = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+        datasets: [{
+            label: 'Amount',
+            data: [{{cat_app_30}}, {{cat_ent_30}}, {{cat_food_30}}, {{cat_skin_30}},
+                    {{cat_comp_30}}, {{cat_book_30}}, {{cat_oth_30}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+
+            borderWidth: 1
+        }]
+    },
+});
+
+var ctx3 = document.getElementById("myChartWeek");
+var myChart = new Chart(ctx3, {
+    type: 'pie',
+    data: {
+        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+        datasets: [{
+            label: 'Amount',
+            data: [{{cat_app_7}}, {{cat_ent_7}}, {{cat_food_7}}, {{cat_skin_7}},
+                    {{cat_comp_7}}, {{cat_book_7}}, {{cat_oth_7}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+
+            borderWidth: 1
+        }]
+    },
+});
+
+var ctx4 = document.getElementById("myChartDay");
+var myChart = new Chart(ctx4, {
+    type: 'pie',
+    data: {
+        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+        datasets: [{
+            label: 'Amount',
+            data: [{{cat_app_24}}, {{cat_ent_24}}, {{cat_food_24}}, {{cat_skin_24}},
+                    {{cat_comp_24}}, {{cat_book_24}}, {{cat_oth_24}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+
+            borderWidth: 1
+        }]
+    },
+});
+</script>
 {% endblock %}

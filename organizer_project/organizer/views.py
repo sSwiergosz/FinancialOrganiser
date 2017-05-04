@@ -2,6 +2,9 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime as dt, timedelta
+from django.utils import timezone
+
 from organizer.models import Transaction
 from organizer.forms import SignUpForm, AddTransactionForm
 
@@ -69,13 +72,127 @@ def all_transactions(request):
 
 def statistics(request):
 
-    amount = 0
+    amount_all = amount_monthly = amount_weekly = amount_daily = 0
+
+    cat_app_30 = cat_ent_30 = cat_food_30 = cat_skin_30 = cat_comp_30 = cat_book_30 = cat_oth_30 = 0
+
+    cat_app_7 = cat_ent_7 = cat_food_7 = cat_skin_7 = cat_comp_7 = cat_book_7 = cat_oth_7 = 0
+
+    cat_app_24 = cat_ent_24 = cat_food_24 = cat_skin_24 = cat_comp_24 = cat_book_24 = cat_oth_24 = 0
+
+    cat_app_all = cat_ent_all = cat_food_all = cat_skin_all = cat_comp_all = cat_book_all = cat_oth_all = 0
+
+    last_30_days = (dt.now().date() - timedelta(days=30))
+    last_7_days = (dt.now().date() - timedelta(days=7))
+    last_24_hours = (dt.now().date() - timedelta(days=1))
 
     for i in Transaction.objects.all():
-        amount += i.price
+
+        #money spent from the beginning
+        if i.category == 'Apparel/Accesory':
+            cat_app_all += i.price
+        elif i.category == 'Entertainment':
+            cat_ent_all += i.price
+        elif i.category == 'Food/Beverage':
+            cat_food_all += i.price
+        elif i.category == 'Skin care/Cosmetics':
+            cat_skin_all += i.price
+        elif i.category == 'Computer/Mobile':
+            cat_comp_all += i.price
+        elif i.category == 'Books/Newspapers':
+            cat_book_all += i.price
+        elif i.category == 'Other':
+            cat_oth_all += i.price
+
+        #money spent within last 30 days
+        if i.purchase_date > last_30_days:
+            if i.category == 'Apparel/Accesory':
+                cat_app_30 += i.price
+            elif i.category == 'Entertainment':
+                cat_ent_30 += i.price
+            elif i.category == 'Food/Beverage':
+                cat_food_30 += i.price
+            elif i.category == 'Skin care/Cosmetics':
+                cat_skin_30 += i.price
+            elif i.category == 'Computer/Mobile':
+                cat_comp_30 += i.price
+            elif i.category == 'Books/Newspapers':
+                cat_book_30 += i.price
+            elif i.category == 'Other':
+                cat_oth_30 += i.price
+
+        #money spent within last 7 days        
+        if i.purchase_date > last_7_days:
+            if i.category == 'Apparel/Accesory':
+                cat_app_7 += i.price
+            elif i.category == 'Entertainment':
+                cat_ent_7 += i.price
+            elif i.category == 'Food/Beverage':
+                cat_food_7 += i.price
+            elif i.category == 'Skin care/Cosmetics':
+                cat_skin_7 += i.price
+            elif i.category == 'Computer/Mobile':
+                cat_comp_7 += i.price
+            elif i.category == 'Books/Newspapers':
+                cat_book_7 += i.price
+            elif i.category == 'Other':
+                cat_oth_7 += i.price
+        
+        #money spent within last 24 hours
+        if i.purchase_date > last_24_hours:
+            if i.category == 'Apparel/Accesory':
+                cat_app_24 += i.price
+            elif i.category == 'Entertainment':
+                cat_ent_24 += i.price
+            elif i.category == 'Food/Beverage':
+                cat_food_24 += i.price
+            elif i.category == 'Skin care/Cosmetics':
+                cat_skin_24 += i.price
+            elif i.category == 'Computer/Mobile':
+                cat_comp_24 += i.price
+            elif i.category == 'Books/Newspapers':
+                cat_book_24 += i.price
+            elif i.category == 'Other':
+                cat_oth_24 += i.price
+
+    l_all = [cat_app_all, cat_ent_all, cat_food_all, cat_skin_all, cat_comp_all, cat_book_all, cat_oth_all]
+    l_30 = [cat_app_30, cat_ent_30, cat_food_30, cat_skin_30, cat_comp_30, cat_book_30, cat_oth_30]
+    l_7 = [cat_app_7, cat_ent_7, cat_food_7, cat_skin_7, cat_comp_7, cat_book_7, cat_oth_7]
+    l_24 = [cat_app_24, cat_ent_24, cat_food_24, cat_skin_24, cat_comp_24, cat_book_24, cat_oth_24]
 
     context = {
-        'amount': amount,
+        'amount_all': sum(l_all),
+        'amount_monthly': sum(l_30),
+        'amount_weekly': sum(l_7),
+        'amount_daily': sum(l_24),
+        'cat_app_all': cat_app_all,
+        'cat_ent_all': cat_ent_all,
+        'cat_food_all': cat_food_all,
+        'cat_skin_all': cat_skin_all,
+        'cat_comp_all': cat_comp_all,
+        'cat_book_all': cat_book_all,
+        'cat_oth_all': cat_oth_all,
+        'cat_app_30': cat_app_30,
+        'cat_ent_30': cat_ent_30,
+        'cat_food_30': cat_food_30,
+        'cat_skin_30': cat_skin_30,
+        'cat_comp_30': cat_comp_30,
+        'cat_book_30': cat_book_30,
+        'cat_oth_30': cat_oth_30,
+        'cat_app_7': cat_app_7,
+        'cat_ent_7': cat_ent_7,
+        'cat_food_7': cat_food_7,
+        'cat_skin_7': cat_skin_7,
+        'cat_comp_7': cat_comp_7,
+        'cat_book_7': cat_book_7,
+        'cat_oth_7': cat_oth_7,
+        'cat_app_24': cat_app_24,
+        'cat_ent_24': cat_ent_24,
+        'cat_food_24': cat_food_24,
+        'cat_skin_24': cat_skin_24,
+        'cat_comp_24': cat_comp_24,
+        'cat_book_24': cat_book_24,
+        'cat_oth_24': cat_oth_24,
     }
 
     return render(request, 'organizer/statistics.html', context)

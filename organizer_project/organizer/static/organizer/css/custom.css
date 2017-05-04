@@ -93,6 +93,11 @@ input[type=search] {
   min-height: 100%;
 }
 
+.trans-card {
+  margin-top: 2.5%;
+  margin-left: 10%;
+  max-width: 80%;
+}
 /* Ids */
 
 
@@ -106,12 +111,6 @@ input[type=search] {
 
 #home-card {
   margin-top: 2.5%;
-}
-
-#trans-card {
-  margin-top: 2.5%;
-  margin-left: 10%;
-  max-width: 80%;
 }
 
 ul li a i:hover, ul li a:hover, nav div a:hover{
