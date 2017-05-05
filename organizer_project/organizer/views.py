@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from datetime import datetime as dt, timedelta
@@ -44,17 +45,20 @@ def add_transaction(request):
     if not request.user.is_authenticated():
         return render(request, 'organizer/login.html')
     else:
-        form = AddTransactionForm(request.POST or None)
-        if form.is_valid():
-            t = form.save(commit=False)
-            t.user = request.user
-            t.product = form.cleaned_data.get('product')
-            t.category = form.cleaned_data.get('category')
-            t.price = form.cleaned_data.get('price')
-            t.purchase_date = form.cleaned_data.get('purchase_date')
-            t.description = form.cleaned_data.get('description')
-            t.save()
-            return render(request, 'organizer/test.html')
+        if request.method == "POST":
+            form = AddTransactionForm(request.POST)
+            if form.is_valid():
+                t = form.save(commit=False)
+                t.user = request.user
+                t.product = form.cleaned_data.get('product')
+                t.category = form.cleaned_data.get('category')
+                t.price = form.cleaned_data.get('price')
+                t.purchase_date = form.cleaned_data.get('purchase_date')
+                t.description = form.cleaned_data.get('description')
+                t.save()
+                return HttpResponseRedirect('/home/')
+        else:
+            form = AddTransactionForm()
 
     return render(request, 'organizer/add-transaction.html', {'form': form, })
 
