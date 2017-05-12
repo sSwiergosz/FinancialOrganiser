@@ -8,41 +8,70 @@
 
 {% block content %}
 <main class="bg-color-main">
+
+  <h3 class="center-align">Your balance: {{user.profile.balance}}</h3>
     
     <div class="row">
         <div class="col s12 m6">
-            <div class="card white z-depth-4 trans-card">
-                <div class="card-content black-text"> 
-                    <h5 class="center-align">All time: {{amount_all}}</h5>
-                    <canvas id="myChartAll" width="400" height="400"></canvas>
-                </div>
-            </div>
+
+         <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header">
+                <p class="header-collapse-txt">Last week: {{amount_weekly}}</p>
+              </div>
+              <div class="collapsible-body">
+
+                    <canvas id="myChartWeek" width="300" height="200"></canvas>
+
+              </div>
+            </li>
+          </ul>
+
+            
         </div>
         <div class="col s12 m6">    
-            <div class="card white z-depth-4 trans-card">
-                <div class="card-content black-text"> 
-                    <h5 class="center-align">Last month: {{amount_monthly}}</h5>
-                    <canvas id="myChartMonth" width="400" height="400"></canvas>
-                </div>
-            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header">
+                <p class="header-collapse-txt">Today: {{amount_daily}}</p>
+              </div>
+              <div class="collapsible-body">
+
+                    <canvas id="myChartDay" width="300" height="200"></canvas>
+
+              </div>
+            </li>
+          </ul>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m6">
-            <div class="card white z-depth-4 trans-card">
-                <div class="card-content black-text"> 
-                    <h5 class="center-align">Last week: {{amount_weekly}}</h5>
-                    <canvas id="myChartWeek" width="400" height="400"></canvas>
-                </div>
-            </div>
+            <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header">
+                <p class="header-collapse-txt">Last month: {{amount_monthly}}</p>
+              </div>
+              <div class="collapsible-body">
+
+                    <canvas id="myChartMonth" width="300" height="200"></canvas>
+
+              </div>
+            </li>
+          </ul>
         </div>
         <div class="col s12 m6">    
-            <div class="card white z-depth-4 trans-card">
-                <div class="card-content black-text"> 
-                    <h5 class="center-align">Last 24h: {{amount_daily}}</h5>
-                    <canvas id="myChartDay" width="400" height="400"></canvas>
-                </div>
-            </div>
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header">
+                <p class="header-collapse-txt">All time: {{amount_all}}</p>
+              </div>
+              <div class="collapsible-body">
+
+                    <canvas id="myChartAll" width="300" height="200"></canvas>
+
+              </div>
+            </li>
+          </ul>
         </div>
     </div>
 
@@ -52,10 +81,12 @@
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="{% static "organizer/js/navbar_buttons.js" %}"></script>
+<script> var myChart; var opt = 'bar';</script> 
 <script>
 var ctx = document.getElementById("myChartAll");
 var myChart = new Chart(ctx, {
-    type: 'pie',
+    type: opt,
     data: {
         labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
         datasets: [{
@@ -78,7 +109,7 @@ var myChart = new Chart(ctx, {
 
 var ctx2 = document.getElementById("myChartMonth");
 var myChart = new Chart(ctx2, {
-    type: 'pie',
+    type: 'bar',
     data: {
         labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
         datasets: [{
@@ -101,7 +132,7 @@ var myChart = new Chart(ctx2, {
 
 var ctx3 = document.getElementById("myChartWeek");
 var myChart = new Chart(ctx3, {
-    type: 'pie',
+    type: 'bar',
     data: {
         labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
         datasets: [{
@@ -124,7 +155,7 @@ var myChart = new Chart(ctx3, {
 
 var ctx4 = document.getElementById("myChartDay");
 var myChart = new Chart(ctx4, {
-    type: 'pie',
+    type: 'bar',
     data: {
         labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
         datasets: [{

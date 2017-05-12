@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime as dt, timedelta
 from django.utils import timezone
 
-from organizer.models import Transaction
+from organizer.models import Transaction, Profile
 from organizer.forms import SignUpForm, AddTransactionForm
 
 def index(request):

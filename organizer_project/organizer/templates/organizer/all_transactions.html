@@ -11,34 +11,36 @@
 
 {% block content %}
 <main class="bg-color-main">
-    
-    <div class="card white z-depth-4" id="trans-card">
-        <div class="card-content black-text"> 
-            <table id="example" class="ui celled table" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Cost</th>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Category</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in transaction_list %}
-                        <tr>
-                            <td>{{ i.product }}</td>
-                            <td>{{ i.price }}</td>
-                            <td>{{ i.purchase_date }}</td>
-                            <td>{{ i.description }}</td>
-                            <td>{{ i.category }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
+    <div class="container">
+    	<div class="col s12">
+		    <div class="card white z-depth-4" id="trans-card">
+		        <div class="card-content black-text"> 
+		            <table id="example" class="ui celled table" cellspacing="0" width="100%">
+		                <thead>
+		                    <tr>
+		                        <th>Name</th>
+		                        <th>Cost</th>
+		                        <th>Date</th>
+		                        <th>Description</th>
+		                        <th>Category</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    {% for i in transaction_list %}
+		                        <tr>
+		                            <td>{{ i.product }}</td>
+		                            <td>{{ i.price }}</td>
+		                            <td>{{ i.purchase_date }}</td>
+		                            <td>{{ i.description }}</td>
+		                            <td>{{ i.category }}</td>
+		                        </tr>
+		                    {% endfor %}
+		                </tbody>
+		            </table>
+		        </div>
+		    </div>
+		    </div>
+	</div>
 
 </main>
 {% endblock %}

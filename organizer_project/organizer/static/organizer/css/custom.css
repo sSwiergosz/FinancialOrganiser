@@ -48,6 +48,14 @@ body {
   flex-direction: column;
 }
 
+input[type=search] {
+  padding: 0 !important;
+  padding-left: 3px !important;
+  margin-left: 0 !important;
+  height: 26px;
+  font-size: 18px !important;
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -66,12 +74,8 @@ td, tr {
   background-color: #84d1c9;
 }
 
-input[type=search] {
-  padding: 0 !important;
-  padding-left: 3px !important;
-  margin-left: 0 !important;
-  height: 26px;
-  font-size: 18px !important;
+.collapsible-body {
+  background-color: white !important;
 }
 
 .disabled {
@@ -79,8 +83,18 @@ input[type=search] {
     opacity:0.6;         
 }
 
+.header-collapse-txt {
+  margin: 0 !important;
+  text-align: center;
+  font-size: 24px !important;
+}
+
 .hide {
   display: none;
+}
+
+.row {
+  margin-bottom: 0 !important;
 }
 
 .test {

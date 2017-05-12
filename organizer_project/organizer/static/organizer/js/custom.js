@@ -1,5 +1,6 @@
 $(".button-collapse").sideNav();
 $('select').material_select();
+$('.collapsible').collapsible();
 
 $(document).ready(function() {
     $('#example').DataTable({
