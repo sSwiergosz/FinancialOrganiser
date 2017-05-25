@@ -30,7 +30,14 @@
 		                        <tr>
 		                            <td>{{ i.product }}</td>
 		                            <td>{{ i.price }}</td>
-		                            <td>{{ i.purchase_date }}</td>
+		                            <td>
+		                            	<span class='hide'>
+		                            		{{ i.purchase_date.year }}
+		                            		{{ i.purchase_date.month|stringformat:"02d" }}
+		                            		{{ i.purchase_date.day|stringformat:"02d" }}
+		                            	</span>
+		                            	{{ i.purchase_date }}
+		                            </td>
 		                            <td>{{ i.description }}</td>
 		                            <td>{{ i.category }}</td>
 		                        </tr>
@@ -50,4 +57,11 @@
 <script src="{% static "organizer/plugins/datatables/jquery.dataTables.min.js" %}"></script>
 <script src="{% static "organizer/plugins/datatables/dataTables.semanticui.min.js" %}"></script>
 <script src="{% static "organizer/plugins/datatables/semantic.min.js" %}"></script>
+
+<script>
+$('#example').DataTable({
+	responsive: true,
+	"lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
+});
+</script>
 {% endblock %}

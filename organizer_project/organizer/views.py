@@ -1,7 +1,11 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from decimal import Decimal
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 from datetime import datetime as dt, timedelta
 from django.utils import timezone
@@ -9,10 +13,10 @@ from django.utils import timezone
 from organizer.models import Transaction, Profile
 from organizer.forms import SignUpForm, AddTransactionForm
 
+
 def index(request):
 	
 	return render(request, 'organizer/index.html')
-
 
 @login_required(login_url='/login/')
 def home(request):
@@ -25,7 +29,6 @@ def home(request):
 
     return render(request, 'organizer/home.html', context)
 
-    
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -40,7 +43,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'organizer/signup.html', {'form': form})
 
-
+@login_required(login_url='/login/')
 def add_transaction(request):
     if not request.user.is_authenticated():
         return render(request, 'organizer/login.html')
@@ -62,7 +65,7 @@ def add_transaction(request):
 
     return render(request, 'organizer/add-transaction.html', {'form': form, })
 
-
+@login_required(login_url='/login/')
 def all_transactions(request):
 
     transaction_list = Transaction.objects.all()
@@ -73,7 +76,7 @@ def all_transactions(request):
 
     return render(request, 'organizer/all_transactions.html', context)
 
-
+@login_required(login_url='/login/')
 def statistics(request):
 
     amount_all = amount_monthly = amount_weekly = amount_daily = 0
@@ -200,3 +203,19 @@ def statistics(request):
     }
 
     return render(request, 'organizer/statistics.html', context)
+
+@login_required(login_url='/login/')
+def statistics_ajax(request):
+
+    increase_balance = Decimal(request.POST.get('the_balance'))
+
+    p = Profile.objects.get(user=request.user)
+    p.balance += increase_balance
+    p.save()
+
+    context = {
+        'balance': p.balance
+    }
+
+    return HttpResponse(json.dumps(context, cls=DjangoJSONEncoder))
+    

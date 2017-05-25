@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from datetime import date
-from organizer.choices import *
+from organizer.choices import NAME_CHOICES
 
 
 class Profile(models.Model):
@@ -15,7 +15,7 @@ class Transaction(models.Model):
     user = models.ForeignKey(User)
     category = models.CharField(choices=NAME_CHOICES, max_length=20)
     product = models.CharField(max_length=200)
-    price = models.FloatField(default=0)
+    price = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     purchase_date = models.DateField(auto_now=False, default=date.today)
     description = models.TextField(blank=True, null=True)
 
