@@ -5,36 +5,51 @@
 
 {% block content %}
 <main class="bg-color-main">
-	<div class="container" id="home-card">
-		<div class="card white z-depth-4">
+   <div class="container" id="home-card">
+      <div class="row">
+         <div class="card white z-depth-4">
             <div class="card-content black-text">
-				{% if user.is_authenticated %}
-					<p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-				{% endif %}
-			</div>
-		</div>
-		<div class="card white z-depth-4">
-			<div class="card-content black-text"> 
-				{{request.args.get}}        
-				<p>Your transactions: </p>
-				<ol>
-					{% if not transaction_list %}
-						<p>You don't have any transactions</p>
-					{% else %}
-						{% for i in transaction_list %}
-							<li>{{ i.product }}</li>
-						{% endfor %}
-					{% endif %}
-				</ol>
-				<a href="{% url 'organizer:all_transactions' %}"> All transactions </a>
-			</div>
-		</div>
-	</div>
-
+               {% if user.is_authenticated %}
+               <p class="center-align" id="greet">Welcome, {{ user.username }}. It's nice to see you!</p>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col s6" style="padding-left: 0 !important;">
+            <div class="card white z-depth-4 infoDiv">
+               <div class="card-content black-text">
+                  {{request.args.get}}        
+                  <p>Your latest transactions: </p>
+                  <ol>
+                     {% if not transaction_list %}
+                     	<p>You don't have any transactions</p>
+                     {% else %}
+                     	{% for i in transaction_list %}
+                     		<li>{{ i.product }}</li>
+                     	{% endfor %}
+                     {% endif %}
+                  </ol>
+                  <a href="{% url 'organizer:all_transactions' %}"> All the transactions </a>
+               </div>
+            </div>
+         </div>
+         <div class="col s6" style="padding-right: 0 !important;">
+            <div class="card white z-depth-4 infoDiv">
+               <div class="card-content black-text">
+                  <p>Basic info:</p>
+                  <ul id="info">
+                     <li>Today is {{ date|default:" a good day!"}}</li>
+                     <li>You've spent {{ weekly|default:0}} last week!</li>
+                     <li>Your current balance is {{ balance|default:0}}</li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </main>
 {% endblock %}
-
 {% block extra_js %}
 <script src="{% static "organizer/js/navbar_buttons.js" %}"></script>
-<script src="{% static "organizer/js/custom_datatables.js" %}"></script>
 {% endblock %}

@@ -1,143 +1,206 @@
 /* Order in this file - media queries, HTML tags, classes and ids*/
-
 /* Media queries */
+
 @media only screen and (max-width: 425px) {
-  #add-tran-card, #auth-card {
-    margin-top: 53% !important;
-    padding: 0 !important;
-    margin-left: -25% !important;
-    margin-right: -25% !important;
-  }
-  #home-card {
-    margin-top: 10% !important;
-  }
+    #add-tran-card {
+        margin-top: 5% !important;
+        padding: 0 !important;
+        margin-left: -25% !important;
+        margin-right: -25% !important;
+    }
+    #auth-card {
+        margin-top: 10% !important;
+        margin-left: -20% !important;
+        margin-right: -20% !important;
+    }
+    #home-card {
+        margin-top: 20% !important;
+    }
+    #login-form {
+        margin-top: 35% !important;
+        margin-left: -30px;
+        width: 200px;
+    }
+    #login-confirm-btn {
+        margin-bottom: 15px !important;
+    }
+    #info1-card {
+        margin-top: -100px !important;
+    }
+    #info2-card {
+        display: none;
+    }
 }
-
+@media only screen and (max-width: 600px) {
+    #info1-card {
+        margin-top: 5% !important;
+        margin-left: 80px !important;
+    }
+    #info2-card {
+        margin-left: 80px !important;
+    }
+    .test {
+        margin-left: -80px !important;
+    }
+}
 @media only screen and (min-width: 425px) and (max-height: 650px) {
-  #auth-card {
-    margin-top: 10% !important;
-    padding: 0 !important;
-    margin-left: -25% !important;
-    margin-right: -25% !important;
-  }
-  #home-card {
-    margin-top: 10% !important;
-  }
+    #auth-card {
+        margin-top: 10% !important;
+        margin-left: -20% !important;
+        margin-right: -20% !important;
+    }
+    #home-card {
+        margin-top: 20% !important;
+    }
+    #login-form {
+        margin-top: 45% !important;
+    }
 }
-
 @media only screen and (min-width: 651px) and (max-height: 1199px) {
-  #add-tran-card{
-    margin-top: 2% !important;
-  }
-  #home-card {
-    margin-top: 2% !important;
-  }
+    #add-tran-card {
+        margin-top: 2% !important;
+    }
+    #home-card {
+        margin-top: 8% !important;
+    }
+    #login-form {
+        margin-top: 20% !important;
+    }
+    #info1-card {
+        margin-top: 30% !important;
+        margin-left: 10%;
+    }
+    #info2-card {
+        margin-left: 10%;
+    }
 }
-
-@media only screen and (min-width: 1200px){
-  #home-card {
-    margin-top: 5% !important;
-  }
+@media only screen and (min-width: 1200px) and (max-height: 1400px) {
+    #login-form {
+        margin-top: 15% !important;
+    }
+    #home-card {
+        margin-top: 5% !important;
+    }
+    #add-tran-card {
+        margin-top: 5% !important;
+    }
+    #info1-card {
+        margin-left: 10%;
+        margin-top: 45% !important;
+    }
+    #info2-card {
+        margin-left: 10%;
+    }
 }
-
-
+@media only screen and (min-width: 1600px) {
+    #home-card {
+        margin-top: 5% !important;
+    }
+    #trans-card {
+        margin-top: 10% !important;
+    }
+    #login-form {
+        margin-top: 30% !important;
+    }
+    #add-tran-card {
+        margin-top: 15% !important;
+    }
+    #info1-card {
+        margin-left: 10%;
+        margin-top: 45%;
+    }
+}
 /* HTML tags */
+
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
-
 input[type=search] {
-  padding: 0 !important;
-  padding-left: 3px !important;
-  margin-left: 0 !important;
-  height: 26px;
-  font-size: 18px !important;
+    padding: 0 !important;
+    padding-left: 3px !important;
+    margin-left: 0 !important;
+    height: 26px;
+    font-size: 18px !important;
 }
-
 main {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
-
+nav li a {
+    font-size: 14.5px !important;
+}
+ol {
+    margin-left: -15px !important;
+}
 table {
-  max-width: 80%;
-  margin-left: 10% !important;
+    max-width: 80%;
+    margin-left: 10% !important;
 }
-
-td, tr {
-  text-align: center !important;
+td,
+tr {
+    text-align: center !important;
 }
-
 /* Classes */
+
 .bg-color-main {
-  background-color: #84d1c9;
+    background-color: #84d1c9;
 }
-
 .collapsible-body {
-  background-color: white !important;
+    background-color: white !important;
 }
-
 .disabled {
-    pointer-events:none;
-    opacity:0.6;         
+    pointer-events: none;
+    opacity: 0.6;
 }
-
 .header-collapse-txt {
-  margin: 0 !important;
-  text-align: center;
-  font-size: 24px !important;
+    margin: 0 !important;
+    text-align: center;
+    font-size: 24px !important;
 }
-
 .hide {
-  display: none;
+    display: none;
 }
-
 .row {
-  margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
-
 .test {
-  background-image: url("../img/1.jpg");
-  webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-position: 40%;
-  min-height: 100%;
+    background-image: url("../img/1.jpg");
+    webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: 40%;
+    min-height: 100%;
 }
-
 /* Ids */
 
-
 #auth-card {
-  margin-top: 2%;
+    margin-top: 2%;
 }
-
 #footer-text {
-	text-align: center;
+    text-align: center;
 }
-
+#greet {
+    font-size: 18px;
+}
 #home-card {
-  margin-top: 2.5%;
+    margin-top: 2.5%;
 }
-
 #login-form {
-  margin-top: 20%;
+    margin-top: 20%;
 }
-
 #trans-card {
-  margin-top: 5%;
+    margin-top: 6%;
 }
-
 #stat-container {
-  margin-top: 10%;
+    margin-top: 5%;
 }
-
 #stat-row {
-  margin-top: 2%;
+    margin-top: 2%;
 }
-
-ul li a i:hover, ul li a:hover, nav div a:hover{
-  color: white !important;
+ul li a i:hover,
+ul li a:hover,
+nav div a:hover {
+    color: white !important;
 }

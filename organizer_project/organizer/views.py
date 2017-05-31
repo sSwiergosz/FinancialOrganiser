@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from decimal import Decimal
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -20,11 +21,41 @@ def index(request):
 
 @login_required(login_url='/login/')
 def home(request):
+    username = request.user
 
-    transaction_list = Transaction.objects.all().order_by('-id')[:5]
+    transaction_list = Transaction.objects.filter(user__username=username).order_by('-id')[:5]
+    date = dt.now().date
+
+    p = Profile.objects.get(user=request.user)
+
+    last_7_days = (dt.now().date() - timedelta(days=7))
+    cat_app_7 = cat_ent_7 = cat_food_7 = cat_skin_7 = cat_comp_7 = cat_book_7 = cat_oth_7 = 0
+
+    for i in Transaction.objects.filter(user__username=username):
+    #money spent within last 7 days        
+        if i.purchase_date > last_7_days:
+            if i.category == 'Apparel/Accesory':
+                cat_app_7 += i.price
+            elif i.category == 'Entertainment':
+                cat_ent_7 += i.price
+            elif i.category == 'Food/Beverage':
+                cat_food_7 += i.price
+            elif i.category == 'Skin care/Cosmetics':
+                cat_skin_7 += i.price
+            elif i.category == 'Computer/Mobile':
+                cat_comp_7 += i.price
+            elif i.category == 'Books/Newspapers':
+                cat_book_7 += i.price
+            elif i.category == 'Other':
+                cat_oth_7 += i.price
+
+    l_7 = [cat_app_7, cat_ent_7, cat_food_7, cat_skin_7, cat_comp_7, cat_book_7, cat_oth_7]
 
     context = {
         'transaction_list': transaction_list,
+        'date': date,
+        'weekly': sum(l_7),
+        'balance': p.balance,
     }
 
     return render(request, 'organizer/home.html', context)
@@ -37,6 +68,9 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            email = form.cleaned_data['email']
+            data = "Hello"
+            send_mail('Welcome!', data, 'financizer@gmail.com', [email])
             login(request, user)
             return render(request, 'organizer/home.html')
     else:
@@ -52,13 +86,16 @@ def add_transaction(request):
             form = AddTransactionForm(request.POST)
             if form.is_valid():
                 t = form.save(commit=False)
-                t.user = request.user
+                p = Profile.objects.get(user=request.user)
+                t.user = p.user
                 t.product = form.cleaned_data.get('product')
                 t.category = form.cleaned_data.get('category')
                 t.price = form.cleaned_data.get('price')
                 t.purchase_date = form.cleaned_data.get('purchase_date')
                 t.description = form.cleaned_data.get('description')
                 t.save()
+                p.balance -= t.price
+                p.save()
                 return HttpResponseRedirect('/home/')
         else:
             form = AddTransactionForm()
@@ -68,7 +105,8 @@ def add_transaction(request):
 @login_required(login_url='/login/')
 def all_transactions(request):
 
-    transaction_list = Transaction.objects.all()
+    username = request.user
+    transaction_list = Transaction.objects.filter(user__username=username)
 
     context = {
         'transaction_list': transaction_list,
@@ -79,13 +117,14 @@ def all_transactions(request):
 @login_required(login_url='/login/')
 def statistics(request):
 
+    username = request.user
     amount_all = amount_monthly = amount_weekly = amount_daily = 0
 
     cat_app_30 = cat_ent_30 = cat_food_30 = cat_skin_30 = cat_comp_30 = cat_book_30 = cat_oth_30 = 0
 
-    cat_app_7 = cat_ent_7 = cat_food_7 = cat_skin_7 = cat_comp_7 = cat_book_7 = cat_oth_7 = 0
-
     cat_app_24 = cat_ent_24 = cat_food_24 = cat_skin_24 = cat_comp_24 = cat_book_24 = cat_oth_24 = 0
+
+    cat_app_7 = cat_ent_7 = cat_food_7 = cat_skin_7 = cat_comp_7 = cat_book_7 = cat_oth_7 = 0
 
     cat_app_all = cat_ent_all = cat_food_all = cat_skin_all = cat_comp_all = cat_book_all = cat_oth_all = 0
 
@@ -93,7 +132,7 @@ def statistics(request):
     last_7_days = (dt.now().date() - timedelta(days=7))
     last_24_hours = (dt.now().date() - timedelta(days=1))
 
-    for i in Transaction.objects.all():
+    for i in Transaction.objects.filter(user__username=username):
 
         #money spent from the beginning
         if i.category == 'Apparel/Accesory':

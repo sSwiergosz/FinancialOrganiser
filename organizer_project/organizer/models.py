@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -19,7 +21,7 @@ class Transaction(models.Model):
     purchase_date = models.DateField(auto_now=False, default=date.today)
     description = models.TextField(blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0}| |{1}| |{2}| |{3}| |{4}|'.format(self.user, self.product, self.price, 
                 self.purchase_date, self.description)
 

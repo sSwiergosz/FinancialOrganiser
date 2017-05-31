@@ -8,208 +8,185 @@
 
 {% block content %}
 <main class="bg-color-main">
-
-  <div class="container" id="stat-container">
-
-    <div class="col s6 offset-s3">
-      <div class="card white z-depth-4">
-        <div class="card-content black-text">
-        
-        <div class="row" id="stat-row">
-
-          <div class="col s12 m6">
-            <h5 class="center-align" id="user-bal">Your balance: {{user.profile.balance}}</h5>
-          </div>
-
-          <div class="col s12 m6">
-            
-              {% csrf_token %}
-              <div class="center-align">
-              <div class="col s12 m6">
-
-              <form action="/" method="POST" id="increase_balance_form">
-                <input placeholder="Amount" id="balance_in" type="number" step=0.01 value=0.00 class="validate" name="test">
-              </form>
-
-              </div>
-              <div class="col s12 m6">  
-                <button type="submit" class="waves-effect waves-light btn amber z-depth-3" id="add-amount-btn">Add amount
-                </button>
-              </div>
-              </div>
-            
-          </div>
-
-        </div>
-
-        </div>
+   <div class="container" id="stat-container">
+      <div class="col s6 offset-s3">
+         <div class="card white z-depth-4" id="stat-card">
+            <div class="card-content black-text">
+               <div class="row" id="stat-row">
+                  <div class="col s12 m6">
+                     <h5 class="center-align" id="user-bal">Your balance: {{user.profile.balance}}</h5>
+                  </div>
+                  <div class="col s12 m6">
+                     {% csrf_token %}
+                     <div class="center-align">
+                        <div class="col s12 m6">
+                           <form action="/" method="POST" id="increase_balance_form">
+                              <input placeholder="Amount" id="balance_in" type="number" step=0.01 value=0.00 class="validate" name="test">
+                           </form>
+                        </div>
+                        <div class="col s12 m6">  
+                           <button type="submit" class="waves-effect waves-light btn amber z-depth-3" id="add-amount-btn">Add amount
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
- 
-    <div class="row">
-        <div class="col s12 m6">
-
-         <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header">
-                <p class="header-collapse-txt">Last week: {{amount_weekly}}</p>
-              </div>
-              <div class="collapsible-body">
-
-                    <canvas id="myChartWeek" width="300" height="200"></canvas>
-
-              </div>
-            </li>
-          </ul>
-
-        </div>
-        <div class="col s12 m6">    
-            <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header">
-                <p class="header-collapse-txt">Today: {{amount_daily}}</p>
-              </div>
-              <div class="collapsible-body">
-
-                    <canvas id="myChartDay" width="300" height="200"></canvas>
-
-              </div>
-            </li>
-          </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12 m6">
-            <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header">
-                <p class="header-collapse-txt">Last month: {{amount_monthly}}</p>
-              </div>
-              <div class="collapsible-body">
-
-                    <canvas id="myChartMonth" width="300" height="200"></canvas>
-
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="col s12 m6">    
-          <ul class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header">
-                <p class="header-collapse-txt">All time: {{amount_all}}</p>
-              </div>
-              <div class="collapsible-body">
-
-                    <canvas id="myChartAll" width="300" height="200"></canvas>
-
-              </div>
-            </li>
-          </ul>
-        </div>
-    </div>
-  </div>
-
+      <div class="row">
+         <div class="col s12 m6">
+            <ul class="collapsible" data-collapsible="accordion" id="daily-card">
+               <li>
+                  <div class="collapsible-header">
+                     <p class="header-collapse-txt">Today: {{amount_daily}}</p>
+                  </div>
+                  <div class="collapsible-body">
+                     <canvas id="myChartDay" width="300" height="200"></canvas>
+                  </div>
+               </li>
+            </ul>
+         </div>
+         <div class="col s12 m6">
+            <ul class="collapsible" data-collapsible="accordion" id="weekly-card">
+               <li>
+                  <div class="collapsible-header">
+                     <p class="header-collapse-txt">Last week: {{amount_weekly}}</p>
+                  </div>
+                  <div class="collapsible-body">
+                     <canvas id="myChartWeek" width="300" height="200"></canvas>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col s12 m6">
+            <ul class="collapsible" data-collapsible="accordion" id="monthly-card">
+               <li>
+                  <div class="collapsible-header">
+                     <p class="header-collapse-txt">Last month: {{amount_monthly}}</p>
+                  </div>
+                  <div class="collapsible-body">
+                     <canvas id="myChartMonth" width="300" height="200"></canvas>
+                  </div>
+               </li>
+            </ul>
+         </div>
+         <div class="col s12 m6">
+            <ul class="collapsible" data-collapsible="accordion" id="all-time-card">
+               <li>
+                  <div class="collapsible-header">
+                     <p class="header-collapse-txt">All time: {{amount_all}}</p>
+                  </div>
+                  <div class="collapsible-body">
+                     <canvas id="myChartAll" width="300" height="200"></canvas>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
 </main>
-{% endblock %}
 
+{% endblock %}
 {% block extra_js %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="{% static "organizer/js/navbar_buttons.js" %}"></script>
-
 <script> var myChart;</script> 
 <script>
-var ctx = document.getElementById("myChartAll");
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
-        datasets: [{
-            label: 'Amount',
-            data: [{{cat_app_all}}, {{cat_ent_all}}, {{cat_food_all}}, {{cat_skin_all}},
-                    {{cat_comp_all}}, {{cat_book_all}}, {{cat_oth_all}}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)'
-            ],
-
-            borderWidth: 1
-        }]
-    },
-});
-
-var ctx2 = document.getElementById("myChartMonth");
-var myChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
-        datasets: [{
-            label: 'Amount',
-            data: [{{cat_app_30}}, {{cat_ent_30}}, {{cat_food_30}}, {{cat_skin_30}},
-                    {{cat_comp_30}}, {{cat_book_30}}, {{cat_oth_30}}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)'
-            ],
-
-            borderWidth: 1
-        }]
-    },
-});
-
-var ctx3 = document.getElementById("myChartWeek");
-var myChart = new Chart(ctx3, {
-    type: 'bar',
-    data: {
-        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
-        datasets: [{
-            label: 'Amount',
-            data: [{{cat_app_7}}, {{cat_ent_7}}, {{cat_food_7}}, {{cat_skin_7}},
-                    {{cat_comp_7}}, {{cat_book_7}}, {{cat_oth_7}}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)'
-            ],
-
-            borderWidth: 1
-        }]
-    },
-});
-
-var ctx4 = document.getElementById("myChartDay");
-var myChart = new Chart(ctx4, {
-    type: 'bar',
-    data: {
-        labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
-        datasets: [{
-            label: 'Amount',
-            data: [{{cat_app_24}}, {{cat_ent_24}}, {{cat_food_24}}, {{cat_skin_24}},
-                    {{cat_comp_24}}, {{cat_book_24}}, {{cat_oth_24}}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)'
-            ],
-
-            borderWidth: 1
-        }]
-    },
-});
+   var ctx = document.getElementById("myChartAll");
+   var myChart = new Chart(ctx, {
+       type: 'bar',
+       data: {
+           labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+           datasets: [{
+               label: 'Amount',
+               data: [{{cat_app_all}}, {{cat_ent_all}}, {{cat_food_all}}, {{cat_skin_all}},
+                       {{cat_comp_all}}, {{cat_book_all}}, {{cat_oth_all}}],
+               backgroundColor: [
+                   'rgba(255, 99, 132, 1.0)',
+                   'rgba(54, 162, 235, 1.0)',
+                   'rgba(255, 206, 86, 1.0)',
+                   'rgba(75, 192, 192, 1.0)',
+                   'rgba(153, 102, 255, 1.0)',
+                   'rgba(255, 159, 64, 1.0)'
+               ],
+   
+               borderWidth: 1
+           }]
+       },
+   });
+   
+   var ctx2 = document.getElementById("myChartMonth");
+   var myChart = new Chart(ctx2, {
+       type: 'bar',
+       data: {
+           labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+           datasets: [{
+               label: 'Amount',
+               data: [{{cat_app_30}}, {{cat_ent_30}}, {{cat_food_30}}, {{cat_skin_30}},
+                       {{cat_comp_30}}, {{cat_book_30}}, {{cat_oth_30}}],
+               backgroundColor: [
+                   'rgba(255, 99, 132, 1.0)',
+                   'rgba(54, 162, 235, 1.0)',
+                   'rgba(255, 206, 86, 1.0)',
+                   'rgba(75, 192, 192, 1.0)',
+                   'rgba(153, 102, 255, 1.0)',
+                   'rgba(255, 159, 64, 1.0)'
+               ],
+   
+               borderWidth: 1
+           }]
+       },
+   });
+   
+   var ctx3 = document.getElementById("myChartWeek");
+   var myChart = new Chart(ctx3, {
+       type: 'bar',
+       data: {
+           labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+           datasets: [{
+               label: 'Amount',
+               data: [{{cat_app_7}}, {{cat_ent_7}}, {{cat_food_7}}, {{cat_skin_7}},
+                       {{cat_comp_7}}, {{cat_book_7}}, {{cat_oth_7}}],
+               backgroundColor: [
+                   'rgba(255, 99, 132, 1.0)',
+                   'rgba(54, 162, 235, 1.0)',
+                   'rgba(255, 206, 86, 1.0)',
+                   'rgba(75, 192, 192, 1.0)',
+                   'rgba(153, 102, 255, 1.0)',
+                   'rgba(255, 159, 64, 1.0)'
+               ],
+   
+               borderWidth: 1
+           }]
+       },
+   });
+   
+   var ctx4 = document.getElementById("myChartDay");
+   var myChart = new Chart(ctx4, {
+       type: 'bar',
+       data: {
+           labels: ["Apparel", "Entertainment", "Food", "Cosmetics", "Computer/Mobile", "Books/Newspapers", "Other"],
+           datasets: [{
+               label: 'Amount',
+               data: [{{cat_app_24}}, {{cat_ent_24}}, {{cat_food_24}}, {{cat_skin_24}},
+                       {{cat_comp_24}}, {{cat_book_24}}, {{cat_oth_24}}],
+               backgroundColor: [
+                   'rgba(255, 99, 132, 1.0)',
+                   'rgba(54, 162, 235, 1.0)',
+                   'rgba(255, 206, 86, 1.0)',
+                   'rgba(75, 192, 192, 1.0)',
+                   'rgba(153, 102, 255, 1.0)',
+                   'rgba(255, 159, 64, 1.0)'
+               ],
+   
+               borderWidth: 1
+           }]
+       },
+   });
 </script>
 {% endblock %}

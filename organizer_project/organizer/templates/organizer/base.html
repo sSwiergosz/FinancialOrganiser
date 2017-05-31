@@ -1,125 +1,128 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Meta tags -->
-    <meta charset="utf-8">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
-    <!-- Compiled Materialize CSS -->
-    <link rel="stylesheet" href="{% static "organizer/css/materialize.min.css" %}">
-    <!-- Custom styles -->
-    <link rel="stylesheet" type="text/css" href="{% static "organizer/css/custom.css" %}">
-    <!--Import Google Icon Font-->
-    <link rel="stylesheet" href="{% static "organizer/fonts/material_icons.css" %}">
-    <!-- Materialize icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    {% block extra_css %}
-    {% endblock %}
-  
-  </head>
-  <body>
-
-    <header>
-      <!-- Navbar -->
-      <nav>
-        <div class="nav-wrapper" style="background-color: #0097A7";>
-          <a href="{% url 'organizer:home' %}" class="brand-logo" style="margin-left: 1%;">Financial organiser</a>
-
-          <!-- Mobile navbar initialization -->
-          <a href="#" data-activates="mobile-demo" class="button-collapse">
-            <i class="material-icons">menu</i>
-          </a>
-
-          <!-- Buttons in the right part of navbar -->
-          <ul class="right hide-on-med-and-down">
-            <li id="all-tran-btn" class="hide">
-              <a href="{% url 'organizer:all_transactions' %}">
-                <i class="material-icons left">shopping_basket</i>All transactions
-              </a>
-            </li>
-            <li id="add-tran-btn" class="hide">
-              <a href="{% url 'organizer:add_transaction' %}">
-                <i class="material-icons left">note_add</i>Add transaction
-              </a>
-            </li>
-            <li id="stat-btn" class="hide">
-              <a href="{% url 'organizer:statistics' %}">
-                <i class="material-icons left">trending_down</i>Statistics
-              </a>
-            </li>
-            <li id="login-btn">
-              <a href="{% url 'organizer:login' %}">
-                <i class="material-icons left">lock_open</i>Login
-              </a>
-            </li>
-            <li id="signup-btn">
-              <a href="{% url 'organizer:signup' %}">
-                <i class="material-icons left">perm_identity</i>Sign Up
-              </a>
-            </li>
-            <li id="logout-btn" class="hide">
-              <a href="{% url 'organizer:logout' %}">
-                <i class="material-icons left">lock</i>Logout
-              </a>
-            </li>
-          </ul>
-
-          <!-- Mobile list menu -->
-          <ul class="side-nav" id="mobile-demo">
-            <li>
-              <a href="#">
-                <i class="material-icons left">lock_open</i>Login
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="material-icons left">perm_identity</i>Register
-              </a>
-            </li>
-          </ul>
-          <!-- End of mobile list menu -->
-
-        </div>
-      </nav>
-      <!-- End of navbar -->
-    </header>
-
-    <!-- Main contet from other templates -->
-
-    {% block content %} 
-    {% endblock %}
-
-    <!-- End content -->
-
-    <!-- Footer -->
-    <footer class="page-footer" style="background-color: #0097A7;">
-
-      <div class="container">
-        <div class="row">
-          <div class="col s12">
-            <p class="grey-text text-lighten-4" id="footer-text">Szymon Świergosz &copy; 2017</p>
-          </div>
-        </div>
-      </div>
-      
-    </footer>
-    <!-- End footer -->
-    
-    
-    <!-- jQuery - required before materialize.js -->
-    <script src="{% static "organizer/js/jquery-3.1.1.js" %}"></script>
-
-    <!-- Compiled JavaScript -->
-    <script src="{% static "organizer/js/materialize.min.js" %}"></script>
-
-    <!-- Custom script -->
-    <script src="{% static "organizer/js/custom.js" %}"></script>
-
-    {% block extra_js %}
-    {% endblock %} 
-  </body>
+   <head>
+      <!-- Meta tags -->
+      <meta charset="utf-8">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!-- Compiled Materialize CSS -->
+      <link rel="stylesheet" href="{% static "organizer/css/materialize.min.css" %}">
+      <!-- Custom styles -->
+      <link rel="stylesheet" type="text/css" href="{% static "organizer/css/custom.css" %}">
+      <!--Import Google Icon Font-->
+      <link rel="stylesheet" href="{% static "organizer/fonts/material_icons.css" %}">
+      <!-- Materialize icons -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      {% block extra_css %}
+      {% endblock %}
+   </head>
+   <body>
+      <header>
+         <!-- Navbar -->
+         <nav>
+            <div class="nav-wrapper" style="background-color: #0097A7";>
+               <a href="{% url 'organizer:home' %}" class="brand-logo" style="margin-left: 1%;">Financizer</a>
+               <!-- Mobile navbar initialization -->
+               <a href="#" data-activates="mobile-demo" class="button-collapse">
+               <i class="material-icons">menu</i>
+               </a>
+               <!-- Buttons in the right part of navbar -->
+               <ul class="right hide-on-med-and-down">
+                  <li id="all-tran-btn" class="hide">
+                     <a href="{% url 'organizer:all_transactions' %}">
+                     <i class="material-icons left">shopping_basket</i>All transactions
+                     </a>
+                  </li>
+                  <li id="add-tran-btn" class="hide">
+                     <a href="{% url 'organizer:add_transaction' %}">
+                     <i class="material-icons left">note_add</i>Add transaction
+                     </a>
+                  </li>
+                  <li id="stat-btn" class="hide">
+                     <a href="{% url 'organizer:statistics' %}">
+                     <i class="material-icons left">trending_down</i>Statistics
+                     </a>
+                  </li>
+                  <li id="login-btn">
+                     <a href="{% url 'organizer:login' %}">
+                     <i class="material-icons left">lock_open</i>Login
+                     </a>
+                  </li>
+                  <li id="signup-btn">
+                     <a href="{% url 'organizer:signup' %}">
+                     <i class="material-icons left">perm_identity</i>Sign Up
+                     </a>
+                  </li>
+                  <li id="logout-btn" class="hide">
+                     <a href="{% url 'organizer:logout' %}">
+                     <i class="material-icons left">lock</i>Logout
+                     </a>
+                  </li>
+               </ul>
+               <!-- Mobile list menu -->
+               <ul class="side-nav" id="mobile-demo">
+                  {% if user.is_authenticated %}
+                  <li>
+                     <a href="{% url 'organizer:add_transaction' %}">
+                     <i class="material-icons left">note_add</i>Add transaction
+                     </a>
+                  </li>
+                  <li>
+                     <a href="{% url 'organizer:all_transactions' %}">
+                     <i class="material-icons left">shopping_basket</i>All transactions
+                     </a>
+                  </li>
+                  <li>
+                     <a href="{% url 'organizer:statistics' %}">
+                     <i class="material-icons left">trending_down</i>Statistics
+                     </a>
+                  </li>
+                  <li>
+                     <a href="{% url 'organizer:logout' %}">
+                     <i class="material-icons left">lock</i>Logout
+                     </a>
+                  </li>
+                  {% else %}
+                  <li>
+                     <a href="{% url 'organizer:login' %}">
+                     <i class="material-icons left">lock_open</i>Login
+                     </a>
+                  </li>
+                  <li>
+                     <a href="{% url 'organizer:signup' %}">
+                     <i class="material-icons left">perm_identity</i>Sign Up
+                     </a>
+                  </li>
+                  {% endif %}
+               </ul>
+               <!-- End of mobile list menu -->
+            </div>
+         </nav>
+         <!-- End of navbar -->
+      </header>
+      <!-- Main contet from other templates -->
+      {% block content %} 
+      {% endblock %}
+      <!-- End content -->
+      <!-- Footer -->
+      <footer class="page-footer" style="background-color: #0097A7;">
+         <div class="container">
+            <div class="row">
+               <div class="col s12">
+                  <p class="grey-text text-lighten-4" id="footer-text">Szymon Świergosz &copy; 2017</p>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- End footer -->
+      <!-- jQuery - required before materialize.js -->
+      <script src="{% static "organizer/js/jquery-3.1.1.js" %}"></script>
+      <!-- Compiled JavaScript -->
+      <script src="{% static "organizer/js/materialize.js" %}"></script>
+      <!-- Custom script -->
+      <script src="{% static "organizer/js/custom.js" %}"></script>
+      {% block extra_js %}
+      {% endblock %} 
+   </body>
 </html>

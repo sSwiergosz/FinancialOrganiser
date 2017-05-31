@@ -2,6 +2,16 @@ $(".button-collapse").sideNav();
 $('select').material_select();
 $('.collapsible').collapsible();
 
+$(document).ready(function() {
+    var heights = $(".infoDiv").map(function() {
+        return $(this).height();
+    }).get(),
+
+    maxHeight = Math.max.apply(null, heights);
+
+    $(".infoDiv").height(maxHeight);
+
+});
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
